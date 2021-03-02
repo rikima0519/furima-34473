@@ -39,7 +39,6 @@
 ### Association
 
 - belongs_to :user
-- belongs_to :address
 - has_many :comments
 - has_one :buy_history
 
@@ -47,7 +46,7 @@
 
 
 
-##  buy_history テーブル
+##  buy_histories テーブル
 
 | Column   | Type        | Options                        |
 | ---------| ----------- | ------------------------------ |
@@ -80,7 +79,6 @@
 
 ### Association
 
-- has_many :items
 - has_many :comments
 - belongs_to :buy_history
 
