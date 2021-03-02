@@ -18,7 +18,7 @@
 
 - has_many :items
 - has_many :comments
-- has_many :buy_historys
+- has_many :buy_histories
 
 
 
