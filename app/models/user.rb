@@ -14,4 +14,5 @@ class User < ApplicationRecord
      validates :first_name_kana, format: { with: /\A[ァ-ヶー－]+\z/ } # 全角カナ
      validates :birth_day
   end
+
 end
