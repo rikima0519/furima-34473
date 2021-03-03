@@ -1,18 +1,9 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   # before_action :authenticate_user!
-  def new
-    @user = User.new
-  end
 
-  def create
-    User.create
-  end
 
-  def destroy
-    user = User.find(id: current_user.id)
-    user.destroy
-  end
+
 
   private
 
