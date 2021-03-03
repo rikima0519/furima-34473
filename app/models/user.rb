@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+
   validates :nickname, presence: true
   validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i } # 半角英数字
 
@@ -20,4 +21,8 @@ class User < ApplicationRecord
   validates :first_name_kana, format: { with: /\A[ァ-ヶー－]+\z/ } # 全角カナ
 
   validates :birth_day, presence: true
+         # has_many :products
+         # has_many :comments
+
+        # validates :name, presence: true
 end
