@@ -7,6 +7,15 @@ RSpec.describe Item, type: :model do
 
   describe '商品出品機能' do
 
+    context '商品出品ができる時' do
+
+      it '入力漏れがなければ保存できる' do
+      expect(@item).to be_valid
+      end
+
+    end
+
+
     context '商品出品ができない時' do
 
     it '商品画像が最低1枚ないと出品できない' do
@@ -80,19 +89,39 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Price is not included in the list")
     end
     it '販売価格は英数字混合だと保存できない' do
-      @item.price = "400yen"
+      @item.price = '400yen'
       @item.valid?
-      expect(@item.errors.full_messages).to include("User must exist")
+      expect(@item.errors.full_messages).to include("Price is not a number")
     end
     it '販売価格は英語だと保存できない' do
-      @item.price = 'four hundred yen'
+      @item.price = 'fourhundredyen'
       @item.valid?
-      expect(@item.errors.full_messages).to include("User must exist")
+      expect(@item.errors.full_messages).to include("Price is not a number")
     end
-    it 'Active_Hashカラム名が1では保存できない' do
+    it 'category_idが1では保存できない' do
       @item.category_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Category must be other than 1")
+    end
+    it 'status_idが1では保存できない' do
+      @item.status_id = 1
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Status must be other than 1")
+    end
+    it 'cost_idが1では保存できない' do
+      @item.cost_id = 1
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Cost must be other than 1")
+    end
+    it 'prefecture_idが1では保存できない' do
+      @item.prefecture_id = 1
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Prefecture must be other than 1")
+    end
+    it 'by_send_idが1では保存できない' do
+      @item.by_send_id = 1
+      @item.valid?
+      expect(@item.errors.full_messages).to include("By send must be other than 1")
     end
   end
 end
