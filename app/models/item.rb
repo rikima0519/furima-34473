@@ -23,12 +23,11 @@ class Item < ApplicationRecord
   end
 
   with_options numericality: { other_than: 1 } do
-   validates :category_id
-   validates :status_id
-   validates :cost_id
-   validates :prefecture_id
-   validates :by_send_id  
+    validates :category_id
+    validates :status_id
+    validates :cost_id
+    validates :prefecture_id
+    validates :by_send_id
   end
   validates :price, numericality: true
-
 end
