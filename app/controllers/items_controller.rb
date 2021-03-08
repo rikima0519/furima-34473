@@ -27,13 +27,14 @@ class ItemsController < ApplicationController
   def edit
     unless current_user.id == @item.user.id
       redirect_to root_path
-   end
+    end
   end
 
   def update
     unless current_user.id == @item.user.id
       redirect_to root_path
-      
+    end
+
    if @item.update(item_params)
     redirect_to action: 'index'
    else
