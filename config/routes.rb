@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   root to: 'items#index'
 
   resources :items
-  resources :orders
+  resources :buy_histories, only:[:index, :create]
 end
