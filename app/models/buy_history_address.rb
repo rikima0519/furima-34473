@@ -5,8 +5,8 @@ class BuyHistoryAddress
   # ここにバリデーションの処理を書く
 
   with_options presence: true do
-    validates :user, foreign_key: true
-    validates :item, foreign_key: true
+    validates :user_id
+    validates :item_id
     validates :post_code
     validates :city
     validates :address
