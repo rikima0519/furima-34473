@@ -1,11 +1,13 @@
 class BuyHistoriesController < ApplicationController
   before_action :authenticate_user!
   def index
-     @item = Item.find(params[:item_id])
-     if current_user.id == @item.user_id
-        redirect_to root_path #自分の商品の購入ページに手動で入ってもrootに飛ばされる
-    end
-     @buy_history_address = BuyHistoryAddress.new
+    @item = Item.find(params[:item_id])
+    if current_user.id == @item.user_id
+      redirect_to root_path # 自分の商品の購入ページに手動で入ってもrootに飛ばされる
+   end
+
+    redirect_to root_path if @item.buy_history.present?
+    @buy_history_address = BuyHistoryAddress.new
   end
 
   def create
@@ -20,18 +22,18 @@ class BuyHistoriesController < ApplicationController
     end
   end
 
-    private
+  private
 
-  def buy_history_params #?
+  def buy_history_params # ?
     params.require(:buy_history_address).permit(:post_code, :prefecture_id, :city, :address, :building_name, :phone_number).merge(user_id: current_user.id, item_id: @item.id, token: params[:token])
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: @item.price,
-      card: buy_history_params[:token],   
-      currency: 'jpy'                 
+      card: buy_history_params[:token],
+      currency: 'jpy'
     )
   end
 end
