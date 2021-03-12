@@ -68,6 +68,24 @@ RSpec.describe BuyHistoryAddress, type: :model do
         expect(@buy_history_address.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
       end
 
+      it '電話番号が英数混合だと購入できない' do
+        @buy_history_address.phone_number = "0909205abcd"
+        @buy_history_address.valid?
+        expect(@buy_history_address.errors.full_messages).to include("Phone number is not a number")
+      end
+
+      it 'user_idが空だと購入できない' do
+        @buy_history_address.user_id = nil
+        @buy_history_address.valid?
+        expect(@buy_history_address.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'item_idが空だと購入できない' do
+        @buy_history_address.item_id = nil
+        @buy_history_address.valid?
+        expect(@buy_history_address.errors.full_messages).to include("Item can't be blank")
+      end
+
       it 'カード情報がないと購入できない' do
         @buy_history_address.token = nil
         @buy_history_address.valid?
