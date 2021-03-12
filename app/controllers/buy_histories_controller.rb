@@ -2,10 +2,9 @@ class BuyHistoriesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item, only: [:index, :create]
   before_action :go_root, only: [:index, :create]
+  before_action :after_buy_root, only: [:index, :create]
 
   def index
-   
-    redirect_to root_path if @item.buy_history.present?
     @buy_history_address = BuyHistoryAddress.new
   end
 
@@ -34,6 +33,10 @@ class BuyHistoriesController < ApplicationController
     if current_user.id == @item.user_id
       redirect_to root_path # 自分の商品の購入ページに手動で入ってもrootに飛ばされる
    end
+  end
+
+  def after_buy_root
+    redirect_to root_path if @item.buy_history.present?
   end
 
   def pay_item

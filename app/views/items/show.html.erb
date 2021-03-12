@@ -27,8 +27,7 @@
       </span>
     </div>
 
-    <% if user_signed_in? %>
-     <% unless @item.buy_history.present? %>
+    <% if user_signed_in? && unless @item.buy_history.present? %>
             <% if current_user.id == @item.user_id  %>
             <%= link_to "商品の編集", edit_item_path(id: @item.id), method: :get, class: "item-red-btn" %>
             <p class="or-text">or</p>
@@ -41,7 +40,7 @@
 
       <% end %>
     <% end %>
-    
+
 
 
    
