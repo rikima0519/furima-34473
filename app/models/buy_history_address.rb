@@ -5,13 +5,16 @@ class BuyHistoryAddress
   with_options presence: true do
     validates :user_id
     validates :item_id
-    validates :post_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-)' }
+    #validates :post_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-)' }
+    validates :post_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'はハイフン(-)が必要です'} #日本語ver
     validates :city
     validates :address
     validates :phone_number, length: { maximum: 11 }, numericality: { only_integer: true }
     validates :token
+
+    validates :prefecture_id, numericality: { other_than: 0, message: "を選択してください" }
   end
-  validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
+   #validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
   # building_nameはバリデーションなし
 
   def save
