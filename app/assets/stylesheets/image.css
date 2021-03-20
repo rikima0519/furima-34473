@@ -1,0 +1,6 @@
+.item-review {
+  height: 300px;
+  width: 400px;
+  object-fit: contain;
+  margin: 0 auto;
+}
