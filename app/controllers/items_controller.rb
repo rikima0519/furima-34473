@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :move_to_root, only: [:edit, :update, :destroy]
   before_action :after_buy_root, only: [:edit, :update]
+  before_action :search_item, only: [:index, :search]
 
   def index
     @items = Item.includes(:user).order('created_at DESC')
@@ -40,6 +41,10 @@ class ItemsController < ApplicationController
     redirect_to action: 'index'
   end
 
+  def search
+    @results = @i.result.includes(:category)
+  end
+
   private
 
   def item_params
@@ -56,5 +61,9 @@ class ItemsController < ApplicationController
 
   def move_to_root
     redirect_to root_path unless current_user.id == @item.user.id
+  end
+
+  def search_item
+    @i = Item.ransack(params[:q])
   end
 end

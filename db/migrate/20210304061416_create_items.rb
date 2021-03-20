@@ -11,6 +11,7 @@ class CreateItems < ActiveRecord::Migration[6.0]
       t.integer :prefecture_id, null: false
       t.integer :by_send_id,    null: false
       t.references :user,       null: false, foreign_key: true
+      t.references  :category, foreign_key: true 
       t.timestamps
     end
   end
