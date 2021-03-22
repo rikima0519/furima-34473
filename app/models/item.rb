@@ -21,9 +21,10 @@ class Item < ApplicationRecord
     validates :by_send_id
     validates :price, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }
     validates :image
+    
   end
 
-  with_options numericality: { other_than: 1 } do
+  with_options numericality: { other_than: 1, message: 'を選択してください' } do
     validates :category_id
     validates :status_id
     validates :cost_id
@@ -32,3 +33,4 @@ class Item < ApplicationRecord
   end
   validates :price, numericality: true
 end
+
